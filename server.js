@@ -5,9 +5,9 @@
 import Hapi from 'hapi';
 import App from './src/App';
 
-const db = require('./src/db/database').db;
-
 const server = new Hapi.Server();
+
+const db = require('./src/db/database').db;
 
 server.connection({
   host: 'localhost',

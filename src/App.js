@@ -1,8 +1,8 @@
 /**
- * Represents the start point configuration of the server
+ * Represents the starting point configuration of the server
  */
 
-import ContactController from '../src/controllers/contact/ContactController';
+import contactRoutes from './controllers/contact';
 
 export default class App {
   constructor(server) {
@@ -14,7 +14,7 @@ export default class App {
   }
 
   loadControllers() {
-    new ContactController(this._server);
+    this._server.route(contactRoutes);
   }
 
   async run() {
