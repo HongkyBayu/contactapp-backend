@@ -7,4 +7,4 @@ const ContactSchema = new Schema({
   email: String,
 });
 
-module.exports = mongoose.model('contactLists', ContactSchema);
+module.exports = mongoose.model('contactList', ContactSchema);

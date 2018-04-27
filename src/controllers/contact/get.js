@@ -1,5 +1,5 @@
 /**
- * Represents the routing for contact controller
+ * Represents the get method for contact model
  */
 
 import Contacts from '../../models/contact/Contacts';
