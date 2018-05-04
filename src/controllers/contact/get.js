@@ -7,9 +7,9 @@ import Contacts from '../../models/contact/Contacts';
 const getContacts = async (request, reply) => {
   Contacts.find((error, contacts) => {
     if (error) {
-      console.log(error);
+      return reply({ status: false, error: 'Failed to get contacts' });
     }
-    return reply(contacts);
+    return reply({ status: true, contactList: contacts });
   });
 };
 

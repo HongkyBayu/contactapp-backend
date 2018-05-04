@@ -12,9 +12,9 @@ const addContact = async (request, reply) => {
   });
   contacts.save((error) => {
     if (error) {
-      console.log(error);
+      return reply({ status: false, error: 'Failed to save contact' });
     }
-    return reply(contacts.id);
+    return reply({ status: true, message: 'Save contact successful' });
   });
 };
 
