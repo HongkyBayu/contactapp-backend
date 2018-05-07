@@ -10,7 +10,7 @@ const getContacts = async (request, h) => {
     if (!contactLists) {
       return h.response().code(404);
     }
-    return contactLists;
+    return h.response(contactLists).code(200);
   } catch (error) {
     return error;
   }
