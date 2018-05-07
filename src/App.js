@@ -2,14 +2,14 @@
  * Represents the starting point configuration of the server
  */
 
-import contactRoutes from './controllers/contact';
+import contactRoutes from '../src/controllers/contact'
 
 export default class App {
   constructor(server) {
     this._server = server;
   }
 
-  async configure() {
+  configure() {
     this.loadControllers();
   }
 

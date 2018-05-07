@@ -5,13 +5,11 @@
 import Hapi from 'hapi';
 import App from './src/App';
 
-const server = new Hapi.Server();
-
 const db = require('./src/db/database').db;
 
-server.connection({
+const server = new Hapi.Server({
   host: 'localhost',
-  port: 3000,
+  port: '3000',
 });
 
 const app = new App(server);

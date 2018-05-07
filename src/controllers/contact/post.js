@@ -4,18 +4,14 @@
 
 import Contacts from '../../models/contact/Contacts';
 
-const addContact = async (request, reply) => {
+const addContact = async (request, h) => {
   const { name, email } = request.payload;
   const contacts = new Contacts({
     name,
     email,
   });
-  contacts.save((error) => {
-    if (error) {
-      return reply({ status: false, error: 'Failed to save contact' });
-    }
-    return reply({ status: true, message: 'Save contact successful' });
-  });
+  await contacts.save({ name, email });
+  return h.response().code(201);
 };
 
 module.exports = {

@@ -4,14 +4,17 @@
 
 import Contacts from '../../models/contact/Contacts';
 
-const getContacts = async (request, reply) => {
-  Contacts.find((error, contacts) => {
-    if (error) {
-      return reply({ status: false, error: 'Failed to get contacts' });
+const getContacts = async (request, h) => {
+  try {
+    const contactLists = await Contacts.find();
+    if (!contactLists) {
+      return h.response().code(404);
     }
-    return reply({ status: true, contactList: contacts });
-  });
-};
+    return contactLists;
+  } catch (error) {
+    return error;
+  }
+}
 
 module.exports = {
   method: 'GET',
