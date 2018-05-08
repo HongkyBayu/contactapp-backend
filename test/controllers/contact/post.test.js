@@ -1,11 +1,11 @@
 import { expect } from 'chai';
 import Hapi from 'hapi';
 import App from '../../../src/App';
-import Contact from '../../../src/models/contact/Contacts';
+import Contacts from '../../../src/models/contact/Contacts';
 
 const db = require('../../../src/db/database').db;
 
-describe('Contact Controller', () => {
+describe('Contacts Controller', () => {
   let server = null;
   beforeEach(() => {
     server = new Hapi.Server();
@@ -13,12 +13,12 @@ describe('Contact Controller', () => {
   });
 
   afterEach((done) => {
-    Contact.remove({}, () => {
+    Contacts.remove({}, () => {
       done();
     });
   });
 
-  describe('POST Contact', () => {
+  describe('POST Contacts', () => {
     it('should POST name: "rangga" and email: "rangga@gmail.com" ', async () => {
       const response = await server.inject({
         url: '/contacts',
@@ -28,7 +28,7 @@ describe('Contact Controller', () => {
           email: 'rangga@gmail.com',
         },
       });
-      const postFromDb = await Contact.findOne();
+      const postFromDb = await Contacts.findOne();
       expect(postFromDb.name).to.eq('rangga');
       expect(postFromDb.email).to.eq('rangga@gmail.com');
       expect(response.statusCode).to.eq(201);
@@ -43,7 +43,7 @@ describe('Contact Controller', () => {
           email: 'ramzi@gmail.com',
         },
       });
-      const postFromDb = await Contact.findOne();
+      const postFromDb = await Contacts.findOne();
       expect(postFromDb.name).to.eq('ramzi');
       expect(postFromDb.email).to.eq('ramzi@gmail.com');
       expect(response.statusCode).to.eq(201);

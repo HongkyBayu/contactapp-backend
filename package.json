@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Contact APP Server",
   "scripts": {
-    "test": "NODE_ENV=test mocha --compilers js:babel-core/register test/**/*.test.js --timeout 10000",
+    "test": "NODE_ENV=test mocha --exit --require babel-core/register --require babel-polyfill test/**/*.test.js",
     "coverage": "nyc --reporter=text --reporter=lcov npm run test",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
