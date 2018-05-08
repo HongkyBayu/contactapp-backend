@@ -19,7 +19,8 @@ describe('Contacts Controller', () => {
   });
 
   describe('GET Contacts', () => {
-    it('should get the contact with first data name field rangga inside the mongodb collection',
+    it(
+      'should get the contact with first data name field rangga inside the mongodb collection',
       async () => {
         const contact = new Contacts({
           name: 'Rangga',
@@ -45,9 +46,11 @@ describe('Contacts Controller', () => {
         expect(postsFromResponse[0].email).to.eq('ranggaaabayu@gmail.com');
         expect(postsFromResponse[1].email).to.eq('ramzi@btpn.com');
         expect(response.statusCode).to.eq(200);
-      });
+      },
+    );
 
-    it('should get the contact with first data name field Iqbal inside the mongodb collection',
+    it(
+      'should get the contact with first data name field Iqbal inside the mongodb collection',
       async () => {
         const contact = new Contacts({
           name: 'Iqbal',
@@ -73,6 +76,18 @@ describe('Contacts Controller', () => {
         expect(postsFromResponse[0].email).to.eq('Iqbal@gmail.com');
         expect(postsFromResponse[1].email).to.eq('josep@btpn.com');
         expect(response.statusCode).to.eq(200);
+      },
+    );
+  });
+
+  describe('GET contacts Error', () => {
+    it('should return status code 404 when there are no contact in the db', async () => {
+      const response = await server.inject({
+        url: '/contacts',
+        method: 'GET',
       });
+
+      expect(response.statusCode).to.eq(404);
+    });
   });
 });

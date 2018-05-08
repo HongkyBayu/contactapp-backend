@@ -7,7 +7,7 @@ import Contacts from '../../models/contact/Contacts';
 const getContacts = async (request, h) => {
   try {
     const contactLists = await Contacts.find();
-    if (!contactLists) {
+    if (contactLists.length === 0) {
       return h.response().code(404);
     }
     return h.response(contactLists).code(200);
