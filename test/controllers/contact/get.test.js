@@ -80,14 +80,16 @@ describe('Contacts Controller', () => {
     );
   });
 
-  describe('GET contacts Error', () => {
-    it('should return status code 404 when there are no contact in the db', async () => {
+  describe('GET contacts Boom Error', () => {
+    it('should return status code 404 and error message "not found" when there are no contact in the db', async () => {
       const response = await server.inject({
         url: '/contacts',
         method: 'GET',
       });
 
-      expect(response.statusCode).to.eq(404);
+      const boom = JSON.parse(response.payload);
+      expect(boom.statusCode).to.eq(404);
+      expect(boom.error).to.eq('Not Found');
     });
   });
 });

@@ -68,8 +68,8 @@ describe('Contact Controller', () => {
     });
   });
 
-  describe('GET by name Error', () => {
-    it('should return code 404 when there are no contact based on request params', async () => {
+  describe('GET by name Boom error', () => {
+    it('should return code 404 and error message "not found" when there are no contact based on request params', async () => {
       const contact = new Contacts({
         name: 'rangga',
         email: 'rangga@gmail.com',
@@ -82,7 +82,9 @@ describe('Contact Controller', () => {
         method: 'GET',
       });
 
-      expect(response.statusCode).to.eq(404);
+      const boom = JSON.parse(response.payload);
+      expect(boom.statusCode).to.eq(404);
+      expect(boom.error).to.eq('Not Found');
     });
   });
 });

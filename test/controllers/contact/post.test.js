@@ -49,4 +49,50 @@ describe('Contacts Controller', () => {
       expect(response.statusCode).to.eq(201);
     });
   });
+
+  describe('POST contact Joi Error', () => {
+    it('should return error code 400 when email is null', async () => {
+      const response = await server.inject({
+        url: '/contacts',
+        method: 'POST',
+        payload: {
+          name: 'ramzi',
+        },
+      });
+      const boom = JSON.parse(response.payload);
+      expect(boom.statusCode).to.eq(400);
+      expect(boom.error).to.eq('Bad Request');
+      expect(boom.message).to.eq('Name and/or Email invalid');
+    });
+
+    it('should error code 404 when name is less than 3 char', async () => {
+      const response = await server.inject({
+        url: '/contacts',
+        method: 'POST',
+        payload: {
+          name: 'ra',
+          email: 'ramzi@btpn.com',
+        },
+      });
+      const boom = JSON.parse(response.payload);
+      expect(boom.statusCode).to.eq(400);
+      expect(boom.error).to.eq('Bad Request');
+      expect(boom.message).to.eq('Name and/or Email invalid');
+    });
+
+    it('should return error code 404 when email have incorrect format', async () => {
+      const response = await server.inject({
+        url: '/contacts',
+        method: 'POST',
+        payload: {
+          name: 'ramzi',
+          email: 'rangga',
+        },
+      });
+      const boom = JSON.parse(response.payload);
+      expect(boom.statusCode).to.eq(400);
+      expect(boom.error).to.eq('Bad Request');
+      expect(boom.message).to.eq('Name and/or Email invalid');
+    });
+  });
 });
